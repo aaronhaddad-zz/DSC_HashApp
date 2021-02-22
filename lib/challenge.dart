@@ -97,6 +97,16 @@ void _updateCoins(int coinsLeft) async {
   print('updated $rowsAffected row(s)');
 }
 
+void _updateLockedMevels(int lockedLevels) async {
+  // row to update
+  Map<String, dynamic> row = {
+    Initdb.columnId: 0,
+    Initdb.columnLockedLevels: lockedLevels,
+  };
+  final rowsAffected = await Initdb.instance.update(row);
+  print('updated $rowsAffected row(s)');
+}
+
 void _numberOfSolved(int solved) async {
   // row to update
   Map<String, dynamic> row = {
@@ -418,6 +428,8 @@ class _ChallengeState extends State<Challenge> {
                                   widget.challengeID);
                               if (result.toString() == code.text.toString()) {
                                 //_solvedProblem(widget.solvedProblems + 1);
+                                _updateLockedMevels(
+                                    await Initdb.instance.lockedLevels() + 1);
                                 _updateCoins(
                                     await Initdb.instance.coins() + 50);
                                 _numberOfSolved(
