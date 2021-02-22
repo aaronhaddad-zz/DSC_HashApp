@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "230896572753",
+    "project_id": "hashcodeapp-ddf3c",
+    "storage_bucket": "hashcodeapp-ddf3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230896572753:android:863241224a54a15c7bdb70",
+        "android_client_info": {
+          "package_name": "com.aaronhaddad.dschashapp.hashcode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "230896572753-h82rqg90ln6g44nkjfed73omsm4gl3oh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aaronhaddad.dschashapp.hashcode",
+            "certificate_hash": "a3a513d45fee62cb791bc0d3dddd46cfc5b012f5"
+          }
+        },
+        {
+          "client_id": "230896572753-pg1267hfphjpajim7imssi4uordr0tbj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuOVOBhT0zcj6e6xtsvMGWztZMsORgTmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "230896572753-pg1267hfphjpajim7imssi4uordr0tbj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
