@@ -46,7 +46,7 @@ class Challenge extends StatefulWidget {
   _ChallengeState createState() => _ChallengeState();
 }
 
-List<String> result = ["0", "0", "0", "0", "0", "0", "0"];
+String result = "";
 
 void _delete() async {
   final rowsDeleted = await Initdb.instance.delete(0);
@@ -54,35 +54,35 @@ void _delete() async {
 
 //this function is to check whether the problem has been solved or not
 String check(String uid, int id) {
-  var acc =[65 , 99 ,99];
-  String result ="",inter ="";
+  var acc = [65, 99, 99];
+  String inter = "";
   int x;
   for (int i = 0; i < 7; i++) {
-    inter+= uid[4 * i];
+    inter += uid[4 * i];
   }
 
   int lastDigit = id % 10, tenTh = id ~/ 10;
 
   for (int i = 0; i < 3; i++) {
-    x =(inter.toString().codeUnitAt(i) + acc[i] ) ~/ 2 - lastDigit;
-    if(x==92)
-      result+="A";
+    x = (inter.toString().codeUnitAt(i) + acc[i]) ~/ 2 - lastDigit;
+    if (x == 92)
+      result += "A";
     else
-      result+=String.fromCharCode(x);
+      result += String.fromCharCode(x);
   }
-  result+=inter[3];
-  x =(inter.toString().codeUnitAt(4) + tenTh + 48) ~/ 2;
-    if(x==92)
-      result+="A";
-    else
-      result+=String.fromCharCode(x);
+  result += inter[3];
+  x = (inter.toString().codeUnitAt(4) + tenTh + 48) ~/ 2;
+  if (x == 92)
+    result += "A";
+  else
+    result += String.fromCharCode(x);
 
-  x =(inter.toString().codeUnitAt(5) + lastDigit + 48) ~/ 2;
-    if(x==92)
-      result+="A";
-    else
-      result+=String.fromCharCode(x);
-  result+= inter[6];
+  x = (inter.toString().codeUnitAt(5) + lastDigit + 48) ~/ 2;
+  if (x == 92)
+    result += "A";
+  else
+    result += String.fromCharCode(x);
+  result += inter[6];
   return result;
 }
 
