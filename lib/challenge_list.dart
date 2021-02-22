@@ -24,16 +24,8 @@ class _ChallengeListState extends State<ChallengeList> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   int globalSolved = 0;
 
-  //Make an array to store challenge name, and whether it was solved or not
-  //Each level should have an array
-  //The specific array will be called on initstate to show the challenges to the user
-
-  //in inits track the number of solved problems in order to set the correct ones to solved and those not to not solved
-
-  //Make an array with all the solved problems to track the solved ones
-
   int numOfChallenges = 1;
-  var tutorial = const [
+  var tutorial = [
     {
       "id": 0,
       "name": "Square²",
@@ -53,7 +45,7 @@ class _ChallengeListState extends State<ChallengeList> {
     }
   ];
 
-  var lvl1 = const [
+  var lvl1 = [
     {
       "id": 1,
       "name": "Chocolate lover",
@@ -122,7 +114,7 @@ class _ChallengeListState extends State<ChallengeList> {
       "solved": "false"
     }
   ];
-  var lvl2 = const [
+  var lvl2 = [
     {
       "id": 5,
       "name": "Deci-Binary numbers",
@@ -161,6 +153,32 @@ class _ChallengeListState extends State<ChallengeList> {
   @override
   void initState() {
     super.initState();
+    int solved = int.parse(widget.solvedProblems);
+    if (widget.level == 0) {
+      Initdb.instance.numberOfSolved().then((value) {
+        solved = value;
+      });
+      setState(() {
+        numOfChallenges = tutorial.length;
+      });
+    } else if (widget.level == 1) {
+      Initdb.instance.numberOfSolved().then((value) {
+        solved = value - 1;
+      });
+      setState(() {
+        numOfChallenges = lvl1.length;
+        tutorial = lvl1;
+      });
+    } else if (widget.level == 2) {
+      Initdb.instance.numberOfSolved().then((value) {
+        solved = value - 5;
+      });
+      numOfChallenges = lvl2.length;
+      tutorial = lvl2;
+    }
+    setState(() {
+      globalSolved = solved;
+    });
     Initdb.instance.coins().then((value) {
       setState(() {
         coins = value;
@@ -229,24 +247,6 @@ class _ChallengeListState extends State<ChallengeList> {
         }
       });
     });
-    //todo: set the number of challenges accroding to the length of the appropriate array
-    int solved = int.parse(widget.solvedProblems);
-    if (widget.level == 0) {
-      setState(() {
-        numOfChallenges = tutorial.length;
-      });
-    } else if (widget.level == 1) {
-      setState(() {
-        numOfChallenges = lvl1.length;
-        tutorial = lvl1;
-        solved -= 2;
-      });
-    } else if (widget.level == 2) {
-      numOfChallenges = lvl2.length;
-      tutorial = lvl2;
-      solved -= 4;
-    }
-    globalSolved = solved;
   }
 
   void _delete() async {

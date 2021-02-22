@@ -104,7 +104,7 @@ void _updateLockedMevels(int lockedLevels) async {
     Initdb.columnLockedLevels: lockedLevels,
   };
   final rowsAffected = await Initdb.instance.update(row);
-  print('updated $rowsAffected row(s)');
+  print('updated $rowsAffected row(s). Updated locked levels');
 }
 
 void _numberOfSolved(int solved) async {
@@ -114,17 +114,7 @@ void _numberOfSolved(int solved) async {
     Initdb.columnNumberOfSolved: solved,
   };
   final rowsAffected = await Initdb.instance.update(row);
-  print('updated $rowsAffected row(s)');
-}
-
-void _solvedProblem(int problem) async {
-  // row to update
-  Map<String, dynamic> row = {
-    Initdb.columnId: 0,
-    Initdb.columnNumberOfSolved: problem,
-  };
-  final rowsAffected = await Initdb.instance.update(row);
-  print('updated $rowsAffected row(s)');
+  print('updated $rowsAffected row(s). Updated Number of problems solved');
 }
 
 void _problemsSolved(String problem) async {
@@ -134,7 +124,7 @@ void _problemsSolved(String problem) async {
     Initdb.columnSolvedProblem: problem,
   };
   final rowsAffected = await Initdb.instance.update(row);
-  print('updated $rowsAffected row(s)');
+  print('updated $rowsAffected row(s). Updated solved problems');
 }
 
 class _ChallengeState extends State<Challenge> {
@@ -427,9 +417,8 @@ class _ChallengeState extends State<Challenge> {
                               check(FirebaseAuth.instance.currentUser.uid,
                                   widget.challengeID);
                               if (result.toString() == code.text.toString()) {
-                                //_solvedProblem(widget.solvedProblems + 1);
                                 _updateLockedMevels(
-                                    await Initdb.instance.lockedLevels() + 1);
+                                    await Initdb.instance.lockedLevels() - 1);
                                 _updateCoins(
                                     await Initdb.instance.coins() + 50);
                                 _numberOfSolved(

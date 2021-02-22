@@ -54,21 +54,27 @@ class _AppInState extends State<AppIn> {
               coins = value;
             });
             Initdb.instance.lockedLevels().then((lvls) {
+              lockedLevels = lvls;
               setState(() {
-                lockedLevels = lvls;
-                if (lockedLevels == 3) {
+                print("lockedLevels $lockedLevels");
+                print("lvls $lvls");
+                if (lvls == 1) {
                   setState(() {
                     level4 = true;
                   });
-                } else if (lockedLevels == 2) {
+                } else if (lvls == 2) {
+                  print("hehe");
                   setState(() {
                     level4 = level3 = true;
                   });
-                } else if (lockedLevels == 1) {
+                } else if (lvls == 3) {
+                  print("m here");
                   setState(() {
                     level4 = level3 = level2 = true;
+                    level1 = false;
                   });
-                } else if (lockedLevels == 0) {
+                } else if (lvls == 4) {
+                  print("here");
                   setState(() {
                     level4 = level3 = level2 = level1 = true;
                   });
@@ -357,7 +363,7 @@ class _AppInState extends State<AppIn> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            if (level1 = false) {
+                            if (!level1) {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -521,7 +527,7 @@ class _AppInState extends State<AppIn> {
                                         ),
                                       ),
                                       Visibility(
-                                        visible: !level1,
+                                        visible: level1,
                                         child: Container(
                                           width: MediaQuery.of(context)
                                                   .size
@@ -552,7 +558,7 @@ class _AppInState extends State<AppIn> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            if (level2 = false) {
+                            if (!level2) {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -715,7 +721,7 @@ class _AppInState extends State<AppIn> {
                                         ),
                                       ),
                                       Visibility(
-                                        visible: !level2,
+                                        visible: level2,
                                         child: Container(
                                           width: MediaQuery.of(context)
                                                   .size
@@ -908,7 +914,7 @@ class _AppInState extends State<AppIn> {
                                         ),
                                       ),
                                       Visibility(
-                                        visible: !level3,
+                                        visible: level3,
                                         child: Container(
                                           width: MediaQuery.of(context)
                                                   .size
