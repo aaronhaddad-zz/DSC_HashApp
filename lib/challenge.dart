@@ -54,24 +54,35 @@ void _delete() async {
 
 //this function is to check whether the problem has been solved or not
 String check(String uid, int id) {
-  var acc = [65, 99, 99];
-  String result = "", inter = "";
+  var acc =[65 , 99 ,99];
+  String result ="",inter ="";
+  int x;
   for (int i = 0; i < 7; i++) {
-    inter += uid[4 * i];
+    inter+= uid[4 * i];
   }
 
   int lastDigit = id % 10, tenTh = id ~/ 10;
 
   for (int i = 0; i < 3; i++) {
-    int x = (inter.toString().codeUnitAt(i) + acc[i]) ~/ 2 - lastDigit;
-    result += String.fromCharCode(x);
+    x =(inter.toString().codeUnitAt(i) + acc[i] ) ~/ 2 - lastDigit;
+    if(x==92)
+      result+="A";
+    else
+      result+=String.fromCharCode(x);
   }
-  result += inter[3];
-  result +=
-      String.fromCharCode((inter.toString().codeUnitAt(4) + tenTh + 48) ~/ 2);
-  result += String.fromCharCode(
-      (inter.toString().codeUnitAt(5) + lastDigit + 48) ~/ 2);
-  result += inter[6];
+  result+=inter[3];
+  x =(inter.toString().codeUnitAt(4) + tenTh + 48) ~/ 2;
+    if(x==92)
+      result+="A";
+    else
+      result+=String.fromCharCode(x);
+
+  x =(inter.toString().codeUnitAt(5) + lastDigit + 48) ~/ 2;
+    if(x==92)
+      result+="A";
+    else
+      result+=String.fromCharCode(x);
+  result+= inter[6];
   return result;
 }
 
